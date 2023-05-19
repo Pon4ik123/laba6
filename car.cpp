@@ -1,22 +1,22 @@
 #include "car.h"
 
-Manufacturer& Manufacturer:: operator= (const Manufacturer& other){
-    if (this->car != nullptr){
-        for(int i = 0; i < number_of_cars; i++){
-            delete this->car[i];
+Manufacturer &Manufacturer::operator=(const Manufacturer &other) {
+    if (this->model != nullptr) {
+        for (int i = 0; i < number_of_cars; i++) {
+            delete this->model[i];
         }
-        delete [] this->car;
+        delete[] this->model;
 
-        this->car = new Car * [number_of_cars];
-        for (int i = 0; i < number_of_cars; i++){
-            this->car[i] = new Car;
-            car[i] = other.car[i];
+        this->model = new Model *[number_of_cars];
+        for (int i = 0; i < number_of_cars; i++) {
+            this->model[i] = new Model;
+            model[i] = other.model[i];
         }
     }
     return *this;
 }
 
-istream& operator>>(istream& in, Manufacturer& manufacturer) {
+istream &operator>>(istream &in, Manufacturer &manufacturer) {
     string manuf, speed, year, key;
 //    in >> car.number;
 
@@ -26,22 +26,22 @@ istream& operator>>(istream& in, Manufacturer& manufacturer) {
         getline(in, year, '\t');
         getline(in, key);
 
-        manufacturer.car[i]->setManuf(manuf);
-        manufacturer.car[i]->setSpeed(atoi(speed.c_str()));
-        manufacturer.car[i]->setYear(atoi(year.c_str()));
-        manufacturer.car[i]->setKey(atoi(key.c_str()));
+        manufacturer.model[i]->setManuf(manuf);
+        manufacturer.model[i]->setSpeed(atoi(speed.c_str()));
+        manufacturer.model[i]->setYear(atoi(year.c_str()));
+        manufacturer.model[i]->setKey(atoi(key.c_str()));
 
 
     }
     return in;
 }
 
-ostream& operator<<(ostream& out, const Manufacturer& manufacturer){
+ostream &operator<<(ostream &out, const Manufacturer &manufacturer) {
     for (size_t j = 0; j < manufacturer.getNumberOfCars(); ++j) {
-        out << left << setw(17) << manufacturer.car[j]->getManuf();
-        out << left << setw(7) << manufacturer.car[j]->getSpeed();
-        out << left << setw(7) << manufacturer.car[j]->getYear();
-        out << left << setw(7) << manufacturer.car[j]->getKey() << endl;
+        out << left << setw(17) << manufacturer.model[j]->getManuf();
+        out << left << setw(7) << manufacturer.model[j]->getSpeed();
+        out << left << setw(7) << manufacturer.model[j]->getYear();
+        out << left << setw(7) << manufacturer.model[j]->getKey() << endl;
     }
 
     return out;
@@ -51,10 +51,11 @@ ostream& operator<<(ostream& out, const Manufacturer& manufacturer){
 //<< left << setw(7)
 //<< left << setw(7)
 
-size_t Manufacturer:: getNumberOfCars() const { return number_of_cars; }
-void Manufacturer:: setNumberOfCars(int num) { this->number_of_cars = num; }
+size_t Manufacturer::getNumberOfCars() const { return number_of_cars; }
 
-void Manufacturer:: random() {
+void Manufacturer::setNumberOfCars(int num) { this->number_of_cars = num; }
+
+void Manufacturer::random() {
     random_device rd;
     default_random_engine dfe(rd());
     string manufacturers[] = {"Mazda", "Toyota", "Honda", "Chevrolet", "Volkswagen"};
@@ -66,6 +67,6 @@ void Manufacturer:: random() {
         int speed = speedDist(dfe);
         int year = yearDist(dfe);
         int key = keyDist(dfe);
-        car[i] = new Car(manuf, speed, year, key);
+        model[i] = new Model(manuf, speed, year, key);
     }
 }

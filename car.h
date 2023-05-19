@@ -8,7 +8,7 @@ using namespace std;
 size_t random(size_t number1, size_t number2);
 
 class Manufacturer {
-    class Car {
+    class Model {
 
         friend class Manufacturer;
         bool etap = false;
@@ -17,9 +17,9 @@ class Manufacturer {
         int year;
         int key2;
     public:
-        Car() : manuf("Default"), speed(0), year(0), key2(0) {}
-        Car(string manuf, int speed, int year, int key) : manuf(manuf), speed(speed), year(year), key2(key) {}
-        ~Car() {}
+        Model() : manuf("Default"), speed(0), year(0), key2(0) {}
+        Model(string manuf, int speed, int year, int key) : manuf(manuf), speed(speed), year(year), key2(key) {}
+        ~Model() {}
 
         string getManuf() const { return manuf; }
         int getSpeed() const { return speed; }
@@ -49,35 +49,35 @@ class Manufacturer {
     };
 
     size_t number_of_cars;
-    Car** car{nullptr};
+    Model** model{nullptr};
 public:
-    Manufacturer() : number_of_cars{::random(1, 5)}, car{new Car*[number_of_cars]} {
+    Manufacturer() : number_of_cars{::random(1, 5)}, model{new Model*[number_of_cars]} {
         for (size_t i = 0; i < number_of_cars; i++){
-            car[i] = new Car();
+            model[i] = new Model();
         }
     }
     Manufacturer(Manufacturer &manufacturer) : number_of_cars(manufacturer.number_of_cars){
-        car = new Car * [number_of_cars];
+        model = new Model * [number_of_cars];
         for (int i = 0; i < number_of_cars; i++){
-            car[i] = new Car{*manufacturer.car[i]};
+            model[i] = new Model{*manufacturer.model[i]};
         }
     }
     ~Manufacturer() {
-        if (car != nullptr){
+        if (model != nullptr){
             for (size_t i = 0; i < number_of_cars; i++){
-                delete car[i];
+                delete model[i];
             }
-            delete[] car;
+            delete[] model;
         }
     }
-    Car* getManufacturer(int i) const { return car[i]; }
+    Model* getCarByIndex(int i) const { return model[i]; }
 
     Manufacturer& operator= (const Manufacturer& other);
     friend istream& operator>>(istream& in, Manufacturer& manufacturer);
     friend ostream& operator<<(ostream&out, const Manufacturer& manufacturer);
 
-    Car * operator[](const size_t index){
-        return car[index];
+    Model * operator[](const size_t index){
+        return model[index];
     }
 
     size_t getNumberOfCars() const;
@@ -86,7 +86,7 @@ public:
 
     void print(){
         for(size_t i = 0; i < number_of_cars; i++){
-            car[i]->print();
+            model[i]->print();
         }
     }
 };

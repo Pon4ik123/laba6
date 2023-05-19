@@ -152,7 +152,8 @@ void show(Manufacturer** manufacturer, const size_t size) {
     cout << "Manufacturer\t" << "Speed\t" << "Year" << endl;
     for (size_t i = 0; i < size; i++) {
         for (size_t j = 0; j < size; j++) {
-            manufacturer[i][j].print();
+            //manufacturer[i][j].print();
+            cout << manufacturer[i][j];
             break;
         }
 
@@ -244,9 +245,9 @@ void edit(Manufacturer** manufacturer, const size_t size, const size_t index) {
             getline(cin, manuf, ' ');
             getline(cin, year, ' ');
             getline(cin, speed);
-            manufacturer[index - 1]->getManufacturer(manufacturerIndex - 1)->setManuf(manuf);
-            manufacturer[index - 1]->getManufacturer(manufacturerIndex - 1)->setYear(atoi(year.c_str()));
-            manufacturer[index - 1]->getManufacturer(manufacturerIndex - 1)->setSpeed(atoi(speed.c_str()));
+            manufacturer[index - 1]->getCarByIndex(manufacturerIndex - 1)->setManuf(manuf);
+            manufacturer[index - 1]->getCarByIndex(manufacturerIndex - 1)->setYear(atoi(year.c_str()));
+            manufacturer[index - 1]->getCarByIndex(manufacturerIndex - 1)->setSpeed(atoi(speed.c_str()));
             cout << "Manufacturer edited successfully!" << endl;
         }
         else {
@@ -269,10 +270,10 @@ void find(Manufacturer** manufacturer, const size_t size) {
     cout << "Manufacturer\t" << "Speed\t" << "Year" << endl;
     for (size_t i = 0; i < size; i++) {
         for (size_t j = 0; j < manufacturer[i]->getNumberOfCars(); j++) {
-            string manuf = manufacturer[i]->getManufacturer(j)->getManuf();
+            string manuf = manufacturer[i]->getCarByIndex(j)->getManuf();
             if (manuf.find(ch) != string::npos) {
-                cout << j + 1 << ". " << manuf << "\t" << manufacturer[i]->getManufacturer(j)->getSpeed()
-                     << "\t" << manufacturer[i]->getManufacturer(j)->getYear() << endl;
+                cout << j + 1 << ". " << manuf << "\t" << manufacturer[i]->getCarByIndex(j)->getSpeed()
+                     << "\t" << manufacturer[i]->getCarByIndex(j)->getYear() << endl;
             }
         }
     }
@@ -289,10 +290,10 @@ void buyCar(Manufacturer** manufacturer, Person** person, const size_t size) {
     cin >> b;
     cout << "Choose manuf";
     cin >> c;
-    if (manufacturer[b - 1]->getManufacturer(c - 1)->getEtap() == false) {
+    if (manufacturer[b - 1]->getCarByIndex(c - 1)->getEtap() == false) {
         cout << "This person bought this car" << endl;
-        person[a - 1]->setKey(manufacturer[b - 1]->getManufacturer(c - 1)->getKey());
-        manufacturer[b - 1]->getManufacturer(c - 1)->setEtap(true);
+        person[a - 1]->setKey(manufacturer[b - 1]->getCarByIndex(c - 1)->getKey());
+        manufacturer[b - 1]->getCarByIndex(c - 1)->setEtap(true);
     }
     else {
         cout << "Sorry, but this car is already sold" << endl;
