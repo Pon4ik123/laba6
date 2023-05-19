@@ -1,0 +1,6 @@
+# ninja log v5
+32	1500	7061495630083410	CMakeFiles/laba5.dir/person.cpp.obj	4da0c46f36901e17
+4	1156	7061525701874639	CMakeFiles/laba5.dir/main.cpp.obj	43717b4ddafad666
+18	1715	7061495632213891	CMakeFiles/laba5.dir/car.cpp.obj	912cdf379f66b026
+13	1858	7061495633664219	CMakeFiles/laba5.dir/func.cpp.obj	f5658dd73bcecdb0
+1156	1532	7061525705599767	laba5.exe	15595231c460cd7
