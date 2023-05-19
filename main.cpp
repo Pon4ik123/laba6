@@ -10,7 +10,7 @@ int main() {
     Person** person{ nullptr };
     Manufacturer** manufacturer{nullptr };
 
-    
+    int a;
 
     do {
         menu();
