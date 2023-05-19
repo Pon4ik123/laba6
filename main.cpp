@@ -10,6 +10,7 @@ int main() {
     Person** person{ nullptr };
     Manufacturer** manufacturer{nullptr };
 
+
     do {
         menu();
         cout << "Make your choice: ";
