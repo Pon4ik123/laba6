@@ -40,8 +40,8 @@ class Manufacturer {
         }
         bool setEtap(bool et) { this->etap = et; }
 
-        void print() const{
-            cout << manuf << "\t" << speed << "\t" << year << "\n";
+        virtual void print() const{
+            cout << left << setw(17) << manuf << left << setw(7) << speed << left << setw(7) << year << left << setw(7);
         }
 
     };
@@ -49,25 +49,35 @@ class Manufacturer {
     size_t number_of_cars;
     Model** model{nullptr};
 
-    class Car : public Model{
-        string car_model;
+    class ElectricCar : public Model{
+        int battery;
     public:
-        Car() : car_model("Default"), Model(){}
-        Car(const string manuf, int speed, int year, int key, string cm) : Model(manuf, speed, year, key), car_model(cm) {}
-        ~Car() {}
+        ElectricCar() : battery(0), Model(){}
+        ElectricCar(const string manuf, int speed, int year, int key, int cm) : Model(manuf, speed, year, key), battery(cm) {}
+        ~ElectricCar() {}
 
-        string getCarModel() const { return car_model; }
-        void setCarModel(string s) { car_model = s; }
+        int getCarModel() const { return battery; }
+        void setCarModel(int s) { battery = s; }
+
+        void print() const override{
+            Model::print();
+            cout << left << setw(7) << battery << endl;
+        }
     };
-    class Motocycle : public Model{
-        string moto_model;
+    class GazCar : public Model{
+        int gaz;
     public:
-        Motocycle(){}
-        Motocycle(const string &manuf, int speed, int year, int key) : Model(manuf, speed, year, key) {}
-        ~Motocycle() {}
+        GazCar() : gaz(0), Model(){}
+        GazCar(const string manuf, int speed, int year, int key, int g) : Model(manuf, speed, year, key), gaz(g) {}
+        ~GazCar() {}
 
-        string getMotoModel() const { return moto_model; }
-        void setMotoModel(string s) { moto_model = s; }
+        int getMotoModel() const { return gaz; }
+        void setMotoModel(int s) { gaz = s; }
+
+        void print() const override{
+            Model::print();
+            cout << left << setw(7) << gaz << endl;
+        }
     };
 public:
     Manufacturer() : number_of_cars{::random(1, 5)}, model{new Model*[number_of_cars]} {

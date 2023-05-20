@@ -62,11 +62,22 @@ void Manufacturer::random() {
     uniform_int_distribution<int> speedDist(220, 300);
     uniform_int_distribution<int> yearDist(1999, 2020);
     uniform_int_distribution<int> keyDist(1000, 9999);
+    uniform_int_distribution<int> batteryDist(0, 100);
+    uniform_int_distribution<int> GazDist(0, 100);
     for (int i = 0; i < number_of_cars; i++) {
         string manuf = manufacturers[dfe() % (sizeof(manufacturers) / sizeof(string))];
         int speed = speedDist(dfe);
         int year = yearDist(dfe);
         int key = keyDist(dfe);
-        model[i] = new Model(manuf, speed, year, key);
+        //model[i] = new Model(manuf, speed, year, key);
+        if (rand()%2){
+            int ptrBattery = batteryDist(dfe);
+            model[i] = new ElectricCar(manuf, speed, year, key, ptrBattery);
+        }
+        else {
+            int ptrGaz= GazDist (dfe);
+            model[i] = new GazCar(manuf, speed, year, key, ptrGaz);
+        }
+
     }
 }

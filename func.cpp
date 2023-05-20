@@ -125,11 +125,11 @@ void find(Person** const person, const size_t size) {
 
 void create(Manufacturer**& manufacturer, const size_t size) {
     manufacturer = new Manufacturer * [size];
+    cout << "Enter the number of manufacturers for car " <<  ": ";
+    int number;
+    cin >> number;
     for (size_t i = 0; i < size; i++) {
         manufacturer[i] = new Manufacturer;
-        int number;
-        cout << "Enter the number of manufacturers for car " << i + 1 << ": ";
-        cin >> number;
         manufacturer[i]->setNumberOfCars(number);
         manufacturer[i]->random();
     }
@@ -149,16 +149,16 @@ void create(Manufacturer**& manufacturer, const size_t size) {
 
 void show(Manufacturer** manufacturer, const size_t size) {
     cout << "========== Cars ==========" << endl;
-    cout << "Manufacturer\t" << "Speed\t" << "Year" << endl;
+    cout << "Manufacturer\t" << "Speed\t" << "Year\t" << "Battery/Gaz" << endl;
     for (size_t i = 0; i < size; i++) {
-        for (size_t j 7= 0; j < size; j++) {
+        //for (size_t j = 0; j < size; j++) {
             //manufacturer[i][j].print();
-            cout << manufacturer[i][j];
-            break;
-        }
+            //cout << manufacturer[i][j];
+            manufacturer[i]->print();
+          //  break;
+        cout << "======================" << endl;
 
     }
-    cout << "======================" << endl;
 }
 
 void move_to_file() {

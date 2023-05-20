@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
     int choice;
-    size_t number_of_manufacturer = random(1, 10);
+    size_t number_of_manufacturer = 2;//random(1, 10);
     size_t index;
 
     Person** person{ nullptr };
