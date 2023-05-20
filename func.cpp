@@ -131,7 +131,9 @@ void create(Manufacturer**& manufacturer, const size_t size) {
     for (size_t i = 0; i < size; i++) {
         manufacturer[i] = new Manufacturer;
         manufacturer[i]->setNumberOfCars(number);
-        manufacturer[i]->random();
+        for (int j = 0; j < manufacturer[i]->getNumberOfCars(); j++) {
+            manufacturer[i]->setCarByIndex(Manufacturer::random(), j);
+        }
     }
     cout << "Cars with data were created" << endl;
 

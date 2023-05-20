@@ -55,7 +55,7 @@ size_t Manufacturer::getNumberOfCars() const { return number_of_cars; }
 
 void Manufacturer::setNumberOfCars(int num) { this->number_of_cars = num; }
 
-void Manufacturer::random() {
+Manufacturer::Model * Manufacturer::random() {
     random_device rd;
     default_random_engine dfe(rd());
     string manufacturers[] = {"Mazda", "Toyota", "Honda", "Chevrolet", "Volkswagen"};
@@ -64,20 +64,20 @@ void Manufacturer::random() {
     uniform_int_distribution<int> keyDist(1000, 9999);
     uniform_int_distribution<int> batteryDist(0, 100);
     uniform_int_distribution<int> GazDist(0, 100);
-    for (int i = 0; i < number_of_cars; i++) {
-        string manuf = manufacturers[dfe() % (sizeof(manufacturers) / sizeof(string))];
-        int speed = speedDist(dfe);
-        int year = yearDist(dfe);
-        int key = keyDist(dfe);
-        //model[i] = new Model(manuf, speed, year, key);
-        if (rand()%2){
-            int ptrBattery = batteryDist(dfe);
-            model[i] = new ElectricCar(manuf, speed, year, key, ptrBattery);
-        }
-        else {
-            int ptrGaz= GazDist (dfe);
-            model[i] = new GazCar(manuf, speed, year, key, ptrGaz);
-        }
+    string manuf = manufacturers[dfe() % (sizeof(manufacturers) / sizeof(string))];
+    int speed = speedDist(dfe);
+    int year = yearDist(dfe);
+    int key = keyDist(dfe);
+    //model[i] = new Model(manuf, speed, year, key);
 
+    if (rand()%2){
+        int ptrBattery = batteryDist(dfe);
+        Model *model = new ElectricCar(manuf, speed, year, key, ptrBattery);
+        return model;
+    }
+    else {
+        int ptrGaz= GazDist (dfe);
+        Model* model = new GazCar(manuf, speed, year, key, ptrGaz);
+        return model;
     }
 }

@@ -18,6 +18,7 @@ class Manufacturer {
     public:
         Model() : manuf("Default"), speed(0), year(0), key2(0) {}
         Model(string manuf, int speed, int year, int key) : manuf(manuf), speed(speed), year(year), key2(key) {}
+        Model(Model& other) : manuf(other.manuf), speed(other.speed), year(other.year), key2(other.key2){}
         ~Model() {}
 
         string getManuf() const { return manuf; }
@@ -44,6 +45,9 @@ class Manufacturer {
             cout << left << setw(17) << manuf << left << setw(7) << speed << left << setw(7) << year << left << setw(7);
         }
 
+//        Model& operator=(const Model& other){
+//
+//        }
     };
 
     size_t number_of_cars;
@@ -54,6 +58,7 @@ class Manufacturer {
     public:
         ElectricCar() : battery(0), Model(){}
         ElectricCar(const string manuf, int speed, int year, int key, int cm) : Model(manuf, speed, year, key), battery(cm) {}
+        ElectricCar(ElectricCar& other) : battery(other.battery), Model(other){}
         ~ElectricCar() {}
 
         int getCarModel() const { return battery; }
@@ -69,6 +74,7 @@ class Manufacturer {
     public:
         GazCar() : gaz(0), Model(){}
         GazCar(const string manuf, int speed, int year, int key, int g) : Model(manuf, speed, year, key), gaz(g) {}
+        GazCar(GazCar& other) : gaz(other.gaz), Model(other) {}
         ~GazCar() {}
 
         int getMotoModel() const { return gaz; }
@@ -100,6 +106,9 @@ public:
         }
     }
     Model* getCarByIndex(int i) const { return model[i]; }
+    void setCarByIndex(Model *other, int index){
+        model[index] = other;
+    };
 
     Manufacturer& operator= (const Manufacturer& other);
     friend istream& operator>>(istream& in, Manufacturer& manufacturer);
@@ -111,7 +120,7 @@ public:
 
     size_t getNumberOfCars() const;
     void setNumberOfCars(int num);
-    void random();
+    static Model * random();
 
     void print(){
         for(size_t i = 0; i < number_of_cars; i++){
