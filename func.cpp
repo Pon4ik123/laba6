@@ -151,7 +151,7 @@ void show(Manufacturer** manufacturer, const size_t size) {
     cout << "========== Cars ==========" << endl;
     cout << "Manufacturer\t" << "Speed\t" << "Year" << endl;
     for (size_t i = 0; i < size; i++) {
-        for (size_t j = 0; j < size; j++) {
+        for (size_t j 7= 0; j < size; j++) {
             //manufacturer[i][j].print();
             cout << manufacturer[i][j];
             break;

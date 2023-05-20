@@ -9,7 +9,6 @@ size_t random(size_t number1, size_t number2);
 
 class Manufacturer {
     class Model {
-
         friend class Manufacturer;
         bool etap = false;
         string manuf;
@@ -26,7 +25,6 @@ class Manufacturer {
         int getYear() const { return year; }
         int getKey() const { return key2; }
         bool getEtap() const { return etap; }
-
 
         void setManuf(string s){
             this->manuf = s;
@@ -50,6 +48,27 @@ class Manufacturer {
 
     size_t number_of_cars;
     Model** model{nullptr};
+
+    class Car : public Model{
+        string car_model;
+    public:
+        Car() : car_model("Default"), Model(){}
+        Car(const string manuf, int speed, int year, int key, string cm) : Model(manuf, speed, year, key), car_model(cm) {}
+        ~Car() {}
+
+        string getCarModel() const { return car_model; }
+        void setCarModel(string s) { car_model = s; }
+    };
+    class Motocycle : public Model{
+        string moto_model;
+    public:
+        Motocycle(){}
+        Motocycle(const string &manuf, int speed, int year, int key) : Model(manuf, speed, year, key) {}
+        ~Motocycle() {}
+
+        string getMotoModel() const { return moto_model; }
+        void setMotoModel(string s) { moto_model = s; }
+    };
 public:
     Manufacturer() : number_of_cars{::random(1, 5)}, model{new Model*[number_of_cars]} {
         for (size_t i = 0; i < number_of_cars; i++){

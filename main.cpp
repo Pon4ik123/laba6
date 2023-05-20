@@ -10,7 +10,6 @@ int main() {
     Person** person{ nullptr };
     Manufacturer** manufacturer{nullptr };
 
-
     do {
         menu();
         cout << "Make your choice: ";
@@ -78,8 +77,6 @@ int main() {
         }
 
     } while (choice != 17);
-
-
 
     return 0;
 }
