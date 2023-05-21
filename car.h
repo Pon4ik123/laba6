@@ -44,15 +44,10 @@ class Manufacturer {
         virtual void print() const{
             cout << left << setw(17) << manuf << left << setw(7) << speed << left << setw(7) << year << left << setw(7);
         }
-
-//        Model& operator=(const Model& other){
-//
-//        }
     };
 
     size_t number_of_cars;
-    //Model** model{nullptr};
-    vector<Model* >model;
+    Model** model{nullptr};
 
     class ElectricCar : public Model{
         int battery;
@@ -67,7 +62,7 @@ class Manufacturer {
 
         void print() const override{
             Model::print();
-            cout << left << setw(7) << battery << endl;
+            cout << right << setw(7) << battery << "%" << endl;
         }
     };
     class GazCar : public Model{
@@ -83,11 +78,11 @@ class Manufacturer {
 
         void print() const override{
             Model::print();
-            cout << left << setw(7) << gaz << endl;
+            cout << right << setw(6) << gaz << " m3" << endl;
         }
     };
 public:
-    Manufacturer() : number_of_cars{::random(1, 5)}, model{pu} {
+    Manufacturer() : number_of_cars{::random(1, 5)}, model{new Model*[number_of_cars]} {
         for (size_t i = 0; i < number_of_cars; i++){
             model[i] = new Model();
         }
