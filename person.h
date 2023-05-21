@@ -2,6 +2,7 @@
 #include <string>
 #include <random>
 #include <ctype.h>
+#include <vector>
 
 using namespace std;
 

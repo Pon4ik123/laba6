@@ -51,7 +51,8 @@ class Manufacturer {
     };
 
     size_t number_of_cars;
-    Model** model{nullptr};
+    //Model** model{nullptr};
+    vector<Model* >model;
 
     class ElectricCar : public Model{
         int battery;
@@ -86,7 +87,7 @@ class Manufacturer {
         }
     };
 public:
-    Manufacturer() : number_of_cars{::random(1, 5)}, model{new Model*[number_of_cars]} {
+    Manufacturer() : number_of_cars{::random(1, 5)}, model{pu} {
         for (size_t i = 0; i < number_of_cars; i++){
             model[i] = new Model();
         }
